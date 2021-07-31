@@ -28,6 +28,8 @@ public class BoardController {
             pages.add(new Integer(x));
         }
 
+        boardService.getPageInfo(nowPageNum);
+
         model.addAttribute("boardList", boardService.boardList(nowPageNum));
         model.addAttribute("nowPage", nowPageNum);
         model.addAttribute("pages", pages);
