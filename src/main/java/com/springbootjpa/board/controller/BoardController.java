@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/board")
@@ -17,7 +18,9 @@ public class BoardController {
     private BoardService boardService;
 
     @GetMapping("/list")
-    public String boardList(Model model) {
+    public String boardList(Model model, @RequestParam(value = "page", defaultValue = "1") Integer pageNum) {
+
+        model.addAttribute("boardList", boardService.boardList(pageNum));
 
         return "/board/boardList";
     }
@@ -31,6 +34,7 @@ public class BoardController {
     @PostMapping("/write")
     public String boardWriteDo(BoardDto dto) {
 
+        boardService.boardWrite(dto);
 
         return "redirect:/board/list";
     }

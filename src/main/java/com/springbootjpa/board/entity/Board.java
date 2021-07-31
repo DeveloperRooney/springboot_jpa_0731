@@ -1,5 +1,6 @@
 package com.springbootjpa.board.entity;
 
+import com.springbootjpa.board.dto.BoardDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -33,4 +34,16 @@ public class Board {
     private String contents;
 
 
+    public BoardDto toDto() {
+
+        BoardDto boardDto = BoardDto.builder()
+                .id(id)
+                .author(author)
+                .regDate(regDate)
+                .updateDate(updateDate)
+                .title(title)
+                .contents(contents).build();
+
+        return boardDto;
+    }
 }

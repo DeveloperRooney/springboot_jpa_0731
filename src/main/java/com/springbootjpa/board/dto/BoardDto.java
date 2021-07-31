@@ -1,5 +1,6 @@
 package com.springbootjpa.board.dto;
 
+import com.springbootjpa.board.entity.Board;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -21,4 +22,17 @@ public class BoardDto {
     private String title;
 
     private String contents;
+
+    public Board toEntity() {
+        Board board = Board.builder()
+                .id(id)
+                .author(author)
+                .regDate(regDate)
+                .updateDate(updateDate)
+                .title(title)
+                .contents(contents)
+                .build();
+
+        return board;
+    }
 }

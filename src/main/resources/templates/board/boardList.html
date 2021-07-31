@@ -96,15 +96,18 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td class="articleNum">1</td>
-                <td class="title titles">안녕하세요. 글 작성 예시입니다.</td>
-                <td class="author">김수한</td>
-                <td class="regDate">2021-07-31</td>
+            <tr th:each="article : ${boardList}">
+                <td class="articleNum" th:text="${article.id}">1</td>
+                <td class="title titles"><a th:href="@{/board/view(id=${article.id})}" th:text="${article.title}"></a></td>
+                <td class="author" th:text="${article.author}">김수한</td>
+                <td class="regDate" th:text="${#temporals.format(article.regDate, 'yyyy-MM-dd HH:mm')}">2021-07-31</td>
                 <td class="hits">933</td>
             </tr>
         </tbody>
     </table>
+    <div th:text="${#httpServletRequest.getParameter('page')}">
+
+    </div>
 
 </div>
 
