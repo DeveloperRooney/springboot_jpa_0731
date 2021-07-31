@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>게시물 작성</title>
+</head>
+
+<style>
+    @font-face {
+        font-family: 'LotteMartDream';
+        font-style: normal;
+        font-weight: 400;
+        src: url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamMedium.woff2') format('woff2'), url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamMedium.woff') format('woff');
+    }
+    @font-face {
+        font-family: 'LotteMartDream';
+        font-style: normal;
+        font-weight: 700;
+        src: url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamBold.woff2') format('woff2'), url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamBold.woff') format('woff');
+    }
+    @font-face {
+        font-family: 'LotteMartDream';
+        font-style: normal;
+        font-weight: 300;
+        src: url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamLight.woff2') format('woff2'), url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamLight.woff') format('woff');
+    }
+    .lottemartdream * {
+        font-family: 'LotteMartDream', sans-serif;
+    }
+
+    body {
+        font-family: 'LotteMartDream', sans-serif;
+    }
+
+    a {
+        text-decoration: none;
+        color : inherit;
+    }
+
+    .layout {
+        width: 580px;
+        margin: 40px auto 0;
+    }
+
+    .layout span {
+        display: inline-block;
+        padding: 4px 0;
+    }
+
+    .layout input, textarea{
+        width : 100%;
+        box-sizing: border-box;
+    }
+
+    .layout textarea {
+        height: 250px;
+    }
+
+    .layout a {
+        display: inline-block;
+        padding: 4px;
+        border : 1px solid black;
+        border-radius: 3px;
+    }
+
+    .write-btn {
+        padding : 4px 0;
+        text-align: right;
+    }
+
+</style>
+
+<body>
+
+    <div class="layout">
+        <h1>글작성</h1>
+        <form name="board_frm" action="/board/write" method="post">
+            <span>작성자</span>
+            <input type="text" name="author" autocomplete="off">
+            <span>제목</span>
+            <input type="text" name="title" autocomplete="off">
+            <span>내용</span>
+            <textarea name="contents"></textarea>
+            <div class="write-btn">
+                <a href="javascript:send()">글작성</a>
+            </div>
+        </form>
+    </div>
+</body>
+
+<script>
+    function send() {
+        if(board_frm.author.value=="") {
+            alert("작성자 이름을 작성해 주세요.");
+            board_frm.author.focus();
+            return;
+        }else if(board_frm.title.value=="") {
+            alert("제목을 작성해 주세요.");
+            board_frm.title.focus();
+            return;
+        }else if(board_frm.contents.value=="") {
+            alert("내용을 작성해 주세요.");
+            board_frm.content.focus();
+            return;
+        }
+
+        board_frm.submit();
+
+    }
+
+</script>
+</html>
