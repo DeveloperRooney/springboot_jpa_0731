@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller
 @RequestMapping("/board")
 public class BoardController {
@@ -18,9 +21,17 @@ public class BoardController {
     private BoardService boardService;
 
     @GetMapping("/list")
-    public String boardList(Model model, @RequestParam(value = "page", defaultValue = "1") Integer pageNum) {
+    public String boardList(Model model, @RequestParam(value = "page", defaultValue = "1") Integer nowPageNum) {
 
-        model.addAttribute("boardList", boardService.boardList(pageNum));
+        List<Integer> pages = new ArrayList<>();
+        for (int x = nowPageNum; x <= nowPageNum + 9; x++) {
+            pages.add(new Integer(x));
+        }
+
+        model.addAttribute("boardList", boardService.boardList(nowPageNum));
+        model.addAttribute("nowPage", nowPageNum);
+        model.addAttribute("pages", pages);
+
 
         return "/board/boardList";
     }
