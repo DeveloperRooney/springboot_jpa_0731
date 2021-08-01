@@ -1,9 +1,14 @@
 package com.springbootjpa.board.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
 public class Paging {
 
     // 한 페이지에 보여줄 게시물 수
@@ -38,10 +43,17 @@ public class Paging {
         }
 
         if (nowPage < 5) {
-            this.startPage = 4;
+            this.startPage = 1;
             this.endPage = 10;
         }else {
-            this.startPage = nowPage - 1;
+            this.startPage = nowPage - 4;
+            if(nowPage + 5 > totalPage) {
+                endPage = totalPage;
+                this.startPage = totalPage - 9;
+            }else {
+                this.endPage = nowPage + 5;
+            }
+
         }
     }
 }

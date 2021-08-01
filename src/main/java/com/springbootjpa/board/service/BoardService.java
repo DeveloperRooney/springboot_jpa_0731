@@ -69,4 +69,24 @@ public class BoardService {
 
 
     }
+
+    public Integer getArticleCount() {
+
+        Long articleCount = boardRepository.count();
+
+        return articleCount.intValue();
+    }
+
+    public List<Integer> getPageBlock(Integer nowPageNum) {
+
+        Paging paging = new Paging(getArticleCount(), nowPageNum);
+
+        List<Integer> pageBlock = new ArrayList<>();
+        for (int x = paging.getStartPage(); x <= paging.getEndPage(); x++) {
+            pageBlock.add(new Integer(x));
+        }
+
+        return pageBlock;
+
+    }
 }

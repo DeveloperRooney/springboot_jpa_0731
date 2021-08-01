@@ -1,6 +1,7 @@
 package com.springbootjpa.board.controller;
 
 import com.springbootjpa.board.dto.BoardDto;
+import com.springbootjpa.board.dto.Paging;
 import com.springbootjpa.board.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,16 +24,11 @@ public class BoardController {
     @GetMapping("/list")
     public String boardList(Model model, @RequestParam(value = "page", defaultValue = "1") Integer nowPageNum) {
 
-        List<Integer> pages = new ArrayList<>();
-        for (int x = nowPageNum; x <= nowPageNum + 9; x++) {
-            pages.add(new Integer(x));
-        }
 
-        boardService.getPageInfo(nowPageNum);
 
         model.addAttribute("boardList", boardService.boardList(nowPageNum));
         model.addAttribute("nowPage", nowPageNum);
-        model.addAttribute("pages", pages);
+        model.addAttribute("pageBlock", boardService.getPageBlock(nowPageNum));
 
 
         return "/board/boardList";

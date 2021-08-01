@@ -115,8 +115,13 @@
         </span>
     </div>
     <div class="page" th:if="${nowPage != null}">
-        <span th:each="page : ${pages}">
-            <a th:href="@{/board/list(page=${page})}" th:text="${page}"></a>
+        <span th:each="page : ${pageBlock}">
+            <span th:if="${nowPage == page}">
+                <a th:href="@{/board/list(page=${page})}" th:text="${page}" style="color: red"></a>
+            </span>
+            <span th:if="${nowPage != page}">
+                <a th:href="@{/board/list(page=${page})}" th:text="${page}"></a>
+            </span>
         </span>
     </div>
 </div>
