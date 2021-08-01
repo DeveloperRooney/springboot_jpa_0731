@@ -24,27 +24,27 @@ public class BoardController {
     @GetMapping("/list")
     public String boardList(Model model, @RequestParam(value = "page", defaultValue = "1") Integer nowPageNum) {
 
-
-
         model.addAttribute("boardList", boardService.boardList(nowPageNum));
         model.addAttribute("nowPage", nowPageNum);
         model.addAttribute("pageBlock", boardService.getPageBlock(nowPageNum));
-
 
         return "/board/boardList";
     }
 
     @GetMapping("/write")
     public String boardWrite() {
-
         return "/board/boardWrite";
     }
 
     @PostMapping("/write")
     public String boardWriteDo(BoardDto dto) {
-
         boardService.boardWrite(dto);
-
         return "redirect:/board/list";
+    }
+
+    @GetMapping("/view")
+    public String boardView(Model model, @RequestParam(name = "id") Integer articleNum) {
+        model.addAttribute("article", boardService.boardView(articleNum));
+        return "/board/boardView";
     }
 }

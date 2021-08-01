@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h1>제목 : <span th:text="${article.title}"></span></h1>
+<h1>작성자 : <span th:text="${article.author}"></span></h1>
+<h1>작성일자 : <span th:text="${#temporals.format(article.regDate, 'yyyy-MM-dd HH:mm')}"></span></h1>
+<h1>수정일자 : <span th:text="${#temporals.format(article.updateDate, 'yyyy-MM-dd HH:mm')}"></span></h1>
+<p>내용 : <span th:text="${article.contents}"></span></p>
+
+</body>
+</html>

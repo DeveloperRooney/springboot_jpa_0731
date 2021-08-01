@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BoardService {
@@ -49,6 +50,20 @@ public class BoardService {
         boardRepository.save(boardEntity);
 
     }
+
+    public BoardDto boardView(Integer articleNum) {
+
+        Long article = articleNum.longValue();
+
+
+        Board articleEntity = boardRepository.findById(article).get();
+
+        BoardDto boardDto = articleEntity.toDto();
+
+        return boardDto;
+
+    }
+
 
     public void getPageInfo(Integer nowPageNum) {
 

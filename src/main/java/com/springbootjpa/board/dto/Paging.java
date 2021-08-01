@@ -14,9 +14,6 @@ public class Paging {
     // 한 페이지에 보여줄 게시물 수
     private Integer onePageArticleCount = 10;
 
-    // 한 페이지에 보여줄 페이지 수
-    private Integer onePageBlock = 10;
-
     // 총 게시물 수
     private Integer articleCount;
 
