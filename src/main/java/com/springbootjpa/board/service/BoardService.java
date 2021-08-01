@@ -52,25 +52,20 @@ public class BoardService {
     }
 
     public BoardDto boardView(Integer articleNum) {
-
         Long article = articleNum.longValue();
-
-
         Board articleEntity = boardRepository.findById(article).get();
-
         BoardDto boardDto = articleEntity.toDto();
-
         return boardDto;
 
     }
 
 
     public void getPageInfo(Integer nowPageNum) {
-
         // 현재 페이지
         Integer nowPage = nowPageNum;
 
         // 총 게시글 수
+
         Long articleTotalCount = boardRepository.count();
 
         // 총 페이지 수
@@ -81,14 +76,24 @@ public class BoardService {
         }else {
             totalPage = articleTotalCount.intValue()/ArticleCount;
         }
+    }
 
+    public void articleUpdate(BoardDto boardDto) {
+
+        Long articleLongNum = boardDto.getId().longValue();
+
+        Optional<Board> boardEntity = boardRepository.findById(articleLongNum);
+
+        boardEntity.ifPresent(selectedArticle -> {
+            selectedArticle.setTitle(boardDto.getTitle());
+            selectedArticle.setContents(boardDto.getContents());
+            boardRepository.save(selectedArticle);
+        });
 
     }
 
     public Integer getArticleCount() {
-
         Long articleCount = boardRepository.count();
-
         return articleCount.intValue();
     }
 

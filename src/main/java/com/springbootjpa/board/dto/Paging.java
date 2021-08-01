@@ -33,11 +33,9 @@ public class Paging {
         this.articleCount = articleCount;
         this.nowPage = nowPage;
 
-        if ((articleCount/10) != 0) {
+        if ((articleCount % 10) != 0) {
             this.totalPage = articleCount/onePageArticleCount + 1;
-        }else {
-            this.totalPage = articleCount/onePageArticleCount;
-        }
+        }else { this.totalPage = articleCount/onePageArticleCount;}
 
         if (nowPage < 5) {
             this.startPage = 1;
@@ -50,7 +48,6 @@ public class Paging {
             }else {
                 this.endPage = nowPage + 5;
             }
-
         }
     }
 }

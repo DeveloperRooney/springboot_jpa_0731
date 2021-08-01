@@ -44,7 +44,24 @@ public class BoardController {
 
     @GetMapping("/view")
     public String boardView(Model model, @RequestParam(name = "id") Integer articleNum) {
+
+        System.out.println(articleNum);
         model.addAttribute("article", boardService.boardView(articleNum));
         return "/board/boardView";
+    }
+
+    @GetMapping("/update")
+    public String boardUpdate(@RequestParam(name="id") Integer articleNum,
+                              @RequestParam(name="title") String title,
+                              @RequestParam(name="contents") String contents) {
+
+        BoardDto boardDto = BoardDto.builder()
+                .id(articleNum.longValue())
+                .title(title)
+                .contents(contents).build();
+
+        boardService.articleUpdate(boardDto);
+
+        return "redirect:/board/list";
     }
 }
